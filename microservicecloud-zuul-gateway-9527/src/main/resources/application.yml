@@ -1,27 +1,29 @@
-server: 
+server:
   port: 9527
- 
-spring: 
+
+spring:
   application:
     name: microservicecloud-zuul-gateway
- 
-eureka: 
-  client: 
-    service-url: 
-      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka,http://eureka7003.com:7003/eureka  
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka,http://eureka7003.com:7003/eureka
   instance:
     instance-id: gateway-9527.com
-    prefer-ip-address: true 
- 
- 
-zuul: 
-  #ignored-services: microservicecloud-dept
+    prefer-ip-address: true
+
+
+zuul:
+  #ignored-services: microservicecloud-dept 隐藏真实微服务名的访问路径，统一入口
+  # 不使用路由的情况：http://localhost:8001/dept/get/2
+  # 使用路由的情况：http://myzuul.com:9527/microservicecloud-dept/dept/get/2 这种来访问，也就是通过别名隐藏真实的微服务名称
   prefix: /atguigu
   ignored-services: "*"
-  routes: 
+  routes:
     mydept.serviceId: microservicecloud-dept
     mydept.path: /mydept/**
- 
+
 info:
   app.name: atguigu-microcloud
   company.name: www.atguigu.com
